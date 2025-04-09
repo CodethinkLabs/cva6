@@ -257,9 +257,7 @@ module store_unit
         data_align(lsu_ctrl_i.vaddr[2:0], {{64 - CVA6Cfg.XLEN{1'b0}}, lsu_ctrl_i.data}));
     st_data_size_n = extract_transfer_size(lsu_ctrl_i.operation);
 
-
-    // TODO: Non hard coded 64
-    endian_correct_data = byte_swap(st_data_n, st_data_size_n, lsu_ctrl_i.be);
+    assign endian_correct_data = byte_swap(st_data_n, st_data_size_n, lsu_ctrl_i.endian);
 
     // save AMO op for next cycle
     if (CVA6Cfg.RVA) begin

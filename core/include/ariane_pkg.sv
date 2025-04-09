@@ -816,31 +816,19 @@ package ariane_pkg;
     return (n < 0) ? 0 : n;
   endfunction : avoid_neg
 
-  function automatic logic [CVA6Cfg.XLEN-1:0] byte_swap(
-      input logic [CVA6Cfg.XLEN-1:0] data,
-      input int                      width,
-      input bit                      swap
-  );
-      logic [CVA6Cfg.XLEN-1:0] result;
-
-      if (!swap) begin
-          return data;
-      end
-
-      result = '0;
-
-      case (width)
-          8, 16, 32, 64: begin
-              for (int i = 0; i < width; i += 8) begin
-                  result[i +: 8] = data[width - 8 - i +: 8];
-              end
-          end
-          default: begin
-              // Optional: raise an assertion or warning
-              $error("Unsupported width: %0d", width);
-          end
-      endcase
-
-      return result;
+  function automatic [CVA6Cfg.XLEN-1:0] byte_swap;
+    input [CVA6Cfg.XLEN-1:0] data;
+    input int width;
+    input bit swap;
+    begin
+        if (!swap) begin
+            byte_swap = data;
+        end else begin
+            byte_swap = '0;
+            for (int i = 0; i < width; i += 8) begin
+                byte_swap[i +: 8] = data[width - 8 - i +: 8];
+            end
+        end
+    end
   endfunction
 endpackage
