@@ -121,6 +121,7 @@ package ariane_pkg;
     | riscv::SSTATUS_UPIE
     | riscv::SSTATUS_SPIE
     | riscv::SSTATUS_UXL
+    | riscv::SSTATUS_SBE
     | riscv::sstatus_sd(Cfg.IS_XLEN64);
   endfunction
 
@@ -815,4 +816,19 @@ package ariane_pkg;
     return (n < 0) ? 0 : n;
   endfunction : avoid_neg
 
+  function automatic [CVA6Cfg.XLEN-1:0] byte_swap;
+    input [CVA6Cfg.XLEN-1:0] data;
+    input int width;
+    input bit swap;
+    begin
+        if (!swap) begin
+            byte_swap = data;
+        end else begin
+            byte_swap = '0;
+            for (int i = 0; i < width; i += 8) begin
+                byte_swap[i +: 8] = data[width - 8 - i +: 8];
+            end
+        end
+    end
+  endfunction
 endpackage
