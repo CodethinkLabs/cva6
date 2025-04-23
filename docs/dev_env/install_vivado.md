@@ -15,11 +15,14 @@ Vivado 2018.2 installation in a container
     RUN apt-get update && apt-get install -y gedit libtinfo5 libncurses5-dev iproute2
 
     # packages needed for building the risc-v toolchain
-    RUN apt-get install build-essential python3 cmake help2man device-tree-compiler python3-pip
-    RUN apt-get install autoconf automake autotools-dev curl git libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool bc zlib1g-dev
+    RUN apt-get update && apt-get install -y build-essential python3 cmake help2man device-tree-compiler python3-pip
+    RUN apt-get update && apt-get install -y autoconf automake autotools-dev curl git libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool bc zlib1g-dev
 
     # packages for cva6-sdk
-    RUN apt-get install autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config libexpat-dev wget cpio rsync
+    RUN apt-get update && apt-get install -y autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev libusb-1.0-0-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev device-tree-compiler pkg-config libexpat-dev wget cpio rsync
+
+    # just useful
+    RUN apt-get update && apt-get install -y vim
     ```
 
 2. Run `podman build --tag vivado .` in that folder
