@@ -44,7 +44,7 @@ Vivado 2018.2 installation in a container
     ./gen_xauthority.sh && \
     mkdir -p dotXilinx && \
     exec \
-    podman run -it --rm -v .Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v dotXilinx:/root/.Xilinx -v .:/mnt -e "DISPLAY" -h vivado --workdir /mnt --network podman --mac-address e2:fa:df:52:9f:78 vivado
+    podman run -it --rm --privileged --group-add keep-groups -v .Xauthority:/root/.Xauthority:ro -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v dotXilinx:/root/.Xilinx -v .:/mnt -e "DISPLAY" -h vivado --workdir /mnt --network podman --mac-address e2:fa:df:52:9f:78 vivado
     # mac-address is random, you can use any
     ```
 5. Inside container run Vivado 2018.2 installer, and point it to /mnt folder (as / will be destroyed)
