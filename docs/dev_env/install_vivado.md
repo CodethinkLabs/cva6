@@ -55,5 +55,8 @@ Vivado 2018.2 installation in a container
 
 8. Apply this workaround https://adaptivesupport.amd.com/s/question/0D52E00006hpi31SAA/unexpected-error-has-occured-11-vivado-20182
 
-9. Now inside container you can cd into cva6 directory and run "LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 make fpga".
-    LD_PRELOAD is to work around this issue https://adaptivesupport.amd.com/s/article/000034450
+   If you don't encounter that Vivado crash, you can skip this workaround.
+
+9. Now inside container you can cd into cva6 directory and run commands there.
+
+   If you encounter this issue https://adaptivesupport.amd.com/s/article/000034450, run vivado with "LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 vivado" to work around it.
